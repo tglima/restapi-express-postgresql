@@ -1,0 +1,69 @@
+{
+  "name": "restapi-express-postgresql",
+  "version": "0.0.1",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "description": "API Rest desenvolvida com Express, PostgreSQL e Docker",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "NODE_ENV=production node ./dist/server.js",
+    "dev": "NODE_ENV=development nodemon src/server.js",
+    "build": "NODE_ENV=production sucrase ./src -d ./dist --transforms imports"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tglima/restapi-express-postgresql.git"
+  },
+  "keywords": [
+    "nodejs",
+    "docker",
+    "express",
+    "node",
+    "postgresql",
+    "node-js",
+    "dockerfile",
+    "tglima",
+    "restapi",
+    "rest"
+  ],
+  "author": "Thiago Lima de Sousa",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tglima/restapi-express-postgresql/issues"
+  },
+  "homepage": "https://github.com/tglima/restapi-express-postgresql#readme",
+  "dependencies": {
+    "body-parser": "^1.20.1",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-async-errors": "^3.1.1",
+    "express-rate-limit": "^6.7.0",
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "localtunnel": "^2.0.2",
+    "morgan-body": "^2.6.8",
+    "swagger-ui-express": "^4.6.0",
+    "youch": "^3.2.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.32.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-security": "^1.6.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.3",
+    "sucrase": "^3.29.0"
+  },
+  "nodemonConfig": {
+    "execMap": {
+      "js": "node -r sucrase/register"
+    },
+    "ignore": [
+      "doc"
+    ]
+  }
+}
