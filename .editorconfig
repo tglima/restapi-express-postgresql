@@ -18,11 +18,10 @@ indent_style = space
 #Define que a identacacao deve utilizar dois espacos
 indent_size = 2
 
-#Impede que seja adicionada uma linha em branco no final de todos os arquivos
-insert_final_newline = false
-
 #Remove os espaços em brancos no final de cada linha
 trim_trailing_whitespace = true
+
+insert_final_newline = true
 
 #Define e forca como sera o estilo de chaves que sera usado
 #Restringe essa configuracao apenas para arquivos do tipo js
