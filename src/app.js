@@ -1,21 +1,16 @@
 /* eslint-disable no-console */
 
-import dotenv from 'dotenv';
 import express from 'express';
+import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
 import morganBody from 'morgan-body';
 import Youch from 'youch';
 import authServices from './app/services/auth.services';
+import configUtil from './app/utils/config.util';
 import dbUtil from './app/utils/db.util';
 import routes from './routes';
 
-const rateLimit = require('express-rate-limit');
-
-const config = process.env;
-config.NODE_ENV = config.NODE_ENV || 'development';
-
-dotenv.config({ path: `./config/env/${config.NODE_ENV}.env` });
-const urlBase = `/api/v${config.NU_VERSION}`;
+const urlBase = `/api/v${configUtil.getNuVersion}`;
 
 const apiLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minutes
