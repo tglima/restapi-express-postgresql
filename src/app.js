@@ -3,13 +3,13 @@
 import dotenv from 'dotenv';
 import express from 'express';
 import helmet from 'helmet';
-import localtunnel from 'localtunnel';
 import morganBody from 'morgan-body';
 import Youch from 'youch';
 import authServices from './app/services/auth.services';
 import routes from './routes';
 
 const rateLimit = require('express-rate-limit');
+
 const config = process.env;
 config.NODE_ENV = config.NODE_ENV || 'development';
 
@@ -29,7 +29,6 @@ class App {
     this.middlewares();
     this.loadRoutes();
     this.loadDB();
-    this.loadTunnel();
     this.exceptionHandler();
   }
 
@@ -54,16 +53,6 @@ class App {
     });
   }
 
-  async loadTunnel() {
-    if (config.NODE_ENV === 'development') {
-      const tunnel = await localtunnel({
-        port: process.env.SERVER_PORT,
-        subdomain: process.env.SUBDOMAIN,
-      });
-      console.log(`${tunnel.url}/api/v1`);
-      tunnel.on('close', () => {});
-    }
-  }
 }
 
 export default new App().server;
