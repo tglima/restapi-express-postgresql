@@ -1,17 +1,12 @@
 /* eslint-disable no-console */
-import dotenv from 'dotenv';
 import app from './app';
+import configUtil from './app/utils/config.util';
 
-const config = process.env;
-config.NODE_ENV = config.NODE_ENV || 'development';
-dotenv.config({ path: `./config/env/${config.NODE_ENV}.env` });
-const urlBase = `/api/v${config.NU_VERSION}`;
-const port = config.SERVER_PORT;
+console.log(`Env mode: ${configUtil.getNodeEnv()}!`);
 
-console.log(`Env mode: ${config.NODE_ENV}!`);
+app.listen(
+  configUtil.getServerPort(),
+  console.warn(`App listening on ${configUtil.getServerPort()}`)
+);
 
-app.listen(port, console.warn(`App listening on ${port}`));
-
-if (config.NODE_ENV === 'development') {
-  console.log(`http://localhost:${port}${urlBase}`);
-}
+console.log(configUtil.getMsgServerStarted());
