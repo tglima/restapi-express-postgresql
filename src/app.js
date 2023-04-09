@@ -6,6 +6,7 @@ import helmet from 'helmet';
 import morganBody from 'morgan-body';
 import Youch from 'youch';
 import authServices from './app/services/auth.services';
+import dbUtil from './app/utils/db.util';
 import routes from './routes';
 
 const rateLimit = require('express-rate-limit');
@@ -28,7 +29,7 @@ class App {
     this.server = express();
     this.middlewares();
     this.loadRoutes();
-    this.loadDB();
+    dbUtil.testConnection();
     this.exceptionHandler();
   }
 
@@ -40,8 +41,6 @@ class App {
     this.server.use(authServices.checkAuth);
   }
 
-  loadDB() {}
-
   loadRoutes() {
     this.server.use(urlBase, routes);
   }
@@ -52,7 +51,6 @@ class App {
       return response.status(500).json(errors);
     });
   }
-
 }
 
 export default new App().server;
