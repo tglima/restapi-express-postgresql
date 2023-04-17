@@ -37,6 +37,25 @@ class DbUtil {
 
     db.release();
   }
+
+  async loadConfigsFromDB() {
+    if (global.projectConfigs) {
+      return;
+    }
+
+    const db = await this.getConnection();
+    const res = await db.query(
+      'SELECT tag_config, json_config FROM project_configs where is_active = true'
+    );
+
+    db.release();
+
+    if (!res.rows || res.rows.length < 1) {
+      throw new Error('Não foi possível ler a tabela project_configs');
+    }
+
+    global.projectConfigs = res.rows;
+  }
 }
 
 export default new DbUtil();
