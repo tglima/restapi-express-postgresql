@@ -6,11 +6,8 @@ import helmet from 'helmet';
 import morganBody from 'morgan-body';
 import Youch from 'youch';
 import authServices from './app/services/auth.services';
-import configUtil from './app/utils/config.util';
 import dbUtil from './app/utils/db.util';
 import routes from './routes';
-
-const urlBase = `/api/v${configUtil.getNuVersion}`;
 
 const apiLimiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minutes
@@ -37,6 +34,8 @@ class App {
   }
 
   loadRoutes() {
+    const nuVersion = +process.env.NU_VERSION || 1;
+    const urlBase = `/api/v${nuVersion}`;
     this.server.use(urlBase, routes);
   }
 
