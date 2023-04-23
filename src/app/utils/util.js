@@ -82,6 +82,27 @@ class Util {
 
     LogRepository.SaveLogDB(req, res, idUserRegister, dtStart);
   }
+
+  generateToken(user) {
+    const token = {};
+
+    token.access_token = jwt.sign(
+      {
+        idRole: user.idRole,
+        idUserRegister: user.id,
+      },
+      configUtil.getTokenSecret(),
+      { expiresIn: 60 * configUtil.getTokenMinutesExpiration() }
+    );
+
+    token.token_type = configUtil.getTokenType();
+    token.expires_in = 60 * configUtil.getTokenMinutesExpiration();
+    token.date_time_expiration = new Date(
+      +new Date() + 60 * configUtil.getTokenMinutesExpiration()
+    );
+
+    return token;
+  }
 }
 
 const util = Object.freeze(new Util());
