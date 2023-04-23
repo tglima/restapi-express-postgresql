@@ -1,8 +1,11 @@
 import dotenv from 'dotenv';
-import constant from './constant.util';
 
-const envMode = process.env.NODE_ENV || constant.development;
+const envModeDefault = 'development';
+const envMode = process.env.NODE_ENV || envModeDefault;
 const path = `./config/env/${envMode}.env`;
+const constant = require('./constant.util');
+
+let instance;
 
 function getJsonFromTagConfig(tagConfig) {
   try {
@@ -14,17 +17,30 @@ function getJsonFromTagConfig(tagConfig) {
   }
 }
 
+function getRegularConfig() {
+  return getJsonFromTagConfig('regularConfig');
+}
+
+function getMessageContactConfig() {
+  return getJsonFromTagConfig('messageContactConfig');
+}
+
+function getTokenConfig() {
+  return getJsonFromTagConfig('tokenConfig');
+}
+
+function getSellConfig() {
+  return getJsonFromTagConfig('sellConfig');
+}
+
 class ConfigUtil {
   constructor() {
     dotenv.config({ path });
-  }
 
-  static getInstance() {
-    if (!ConfigUtil.instance) {
-      ConfigUtil.instance = new ConfigUtil();
+    if (instance) {
+      throw new Error(constant.MsgErrorInstance);
     }
-
-    return ConfigUtil.instance;
+    instance = this;
   }
 
   getNuVersion() {
@@ -47,23 +63,50 @@ class ConfigUtil {
     return `Servidor iniciado - Express rodando na porta: ${this.getServerPort()}`;
   }
 
-  getTokenConfig() {
-    return getJsonFromTagConfig('tokenConfig');
+  getQtMinCharMessage() {
+    return +getMessageContactConfig().qtMinCharMessage;
   }
 
-  getSellConfig() {
-    return getJsonFromTagConfig('sellConfig');
+  getTokenMinutesExpiration() {
+    return +getTokenConfig().tokenMinutesExpiration;
   }
 
-  getRegularConfig() {
-    return getJsonFromTagConfig('regularConfig');
+  getTokenSecret() {
+    return getTokenConfig().tokenSecret;
   }
 
-  getMessageContactConfig() {
-    return getJsonFromTagConfig('messageContactConfig');
+  getTokenType() {
+    return getTokenConfig().tokenType;
+  }
+
+  getMinAgeSell() {
+    return +getSellConfig().minAgeSellProduct;
+  }
+
+  getMaxAgeSell() {
+    return +getSellConfig().maxAgeSellProduct;
+  }
+
+  getNuYearsValProduct() {
+    return +getSellConfig().nuYearsValProduct;
+  }
+
+  getIdGuestUser() {
+    return +getRegularConfig().idGuestUser;
+  }
+
+  getIdRoleGuestUser() {
+    return +getRegularConfig().idGuestRole;
+  }
+
+  getIdSuperUser() {
+    return +getRegularConfig().idSuperUser;
+  }
+
+  getIdRoleSuperUser() {
+    return +getRegularConfig().idSuperRole;
   }
 }
 
-const configUtil = ConfigUtil.getInstance();
-
+const configUtil = Object.freeze(new ConfigUtil());
 export default configUtil;
