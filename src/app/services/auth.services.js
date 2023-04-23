@@ -1,7 +1,75 @@
 import dotenv from 'dotenv';
+import ReturnDTO from '../dtos/ReturnDTO';
+import controlAccessRepository from '../repositories/ControlAccessRepository';
+import configUtil from '../utils/config.util';
+import util from '../utils/util';
+
+const constant = require('../utils/constant.util');
+
 const config = process.env;
 config.NODE_ENV = config.NODE_ENV || 'development';
 dotenv.config({ path: `./config/env/${config.NODE_ENV}.env` });
+
+async function checkPermissionUserReq(req) {
+  const result = await util.getUserDataReq(req);
+
+  if (!result.wasSuccess) {
+    return false;
+  }
+
+  const userDataReq = result.jsonBody;
+
+  if (userDataReq.idRole === configUtil.getIdRoleSuperUser()) {
+    return true;
+  }
+
+  let urlBase = req.originalUrl;
+
+  if (req.originalUrl.includes('=')) {
+    const array = req.originalUrl.split('=');
+    urlBase = `${array[0]}`;
+  }
+
+  urlBase = urlBase.replace(`${configUtil.getUrlBaseApi()}`, '');
+
+  const resultFind = await controlAccessRepository.checkPermissionEndpoint(
+    urlBase,
+    userDataReq.idRole
+  );
+
+  if (!resultFind.wasSuccess || !resultFind.jsonBody) {
+    return false;
+  }
+
+  const accessControl = resultFind.jsonBody[0];
+
+  switch (req.method.toString().toUpperCase()) {
+    case 'GET':
+      return accessControl.get;
+    case 'POST':
+      return accessControl.post;
+    case 'DELETE':
+      return accessControl.delete;
+    case 'PUT':
+      return accessControl.update;
+    default:
+      return false;
+  }
+}
+
+async function validateAuthReq(req) {
+  const dtStart = new Date().toJSON();
+  const mustContinue = await checkPermissionUserReq(req);
+
+  if (!mustContinue) {
+    await util.saveLog(
+      req,
+      new ReturnDTO(401, false, constant.MsgStatus401Alt),
+      dtStart
+    );
+  }
+  return mustContinue;
+}
 
 /**
  *
@@ -18,7 +86,12 @@ const verifyMustContinue = async (req) => {
     return true;
   }
 
-  return false;
+  if (urlBase === '/favicon.ico') {
+    return false;
+  }
+  const result = await validateAuthReq(req);
+
+  return result;
 };
 
 class AuthService {
@@ -31,7 +104,9 @@ class AuthService {
    */
   async checkAuth(req, res, next) {
     try {
-      if (await verifyMustContinue(req)) {
+      const result = await verifyMustContinue(req);
+
+      if (result) {
         next();
       } else {
         res.status(401).send({
