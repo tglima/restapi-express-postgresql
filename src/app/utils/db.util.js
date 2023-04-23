@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
 import dotenv from 'dotenv';
-import constant from './constant.util';
 
 const { Pool } = require('pg');
+const constant = require('./constant.util');
 
 const envMode = process.env.NODE_ENV || constant.development;
 const path = `./config/env/${envMode}.env`;
