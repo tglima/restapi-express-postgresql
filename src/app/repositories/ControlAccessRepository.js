@@ -10,13 +10,17 @@ const { default: dbUtil } = require('../utils/db.util');
  * @returns {ReturnDTO}
  */
 exports.checkPermissionEndpoint = async (urlBase, idRole) => {
+  const values = [urlBase, idRole];
   const returnDTO = new ReturnDTO(0, false, undefined);
 
   try {
     const db = await dbUtil.getConnection();
-    const res = await db.query(
-      `SELECT * FROM vw_endpoints_permissions where url = '${urlBase}' and id_role = ${idRole}`
-    );
+
+    let sql = 'SELECT * ';
+    sql += 'FROM vw_endpoints_permissions ';
+    sql += 'WHERE URL = $1 AND ID_ROLE = $2';
+
+    const res = await db.query(sql, values);
 
     db.release();
 
