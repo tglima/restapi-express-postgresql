@@ -48,7 +48,7 @@ class ConfigUtil {
   }
 
   getUrlBaseApi() {
-    return `/api/v${this.getNuVersion}`;
+    return `/api/v${this.getNuVersion()}`;
   }
 
   getServerPort() {
