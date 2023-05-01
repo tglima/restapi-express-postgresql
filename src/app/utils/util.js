@@ -98,7 +98,7 @@ class Util {
     token.token_type = configUtil.getTokenType();
     token.expires_in = 60 * configUtil.getTokenMinutesExpiration();
     token.date_time_expiration = new Date(
-      +new Date() + 60 * configUtil.getTokenMinutesExpiration()
+      Date.now() + configUtil.getTokenMinutesExpiration() * 60 * 1000
     );
 
     return token;
