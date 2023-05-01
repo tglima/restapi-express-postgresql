@@ -33,6 +33,7 @@ exports.SaveLogDB = async (req, res, idUser, dtStart) => {
     ];
 
     await db.query(sql, values);
+    db.release();
   } catch (error) {
     console.error(error);
   }
