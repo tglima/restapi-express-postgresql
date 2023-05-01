@@ -5,9 +5,9 @@ function getUserFromRowDB(rowDb) {
   const user = {};
 
   try {
-    user.nmUser = rowDb.NM_USER;
-    user.idRole = rowDb.ID_ROLE;
-    user.idUser = rowDb.DbID_USER;
+    user.nmUser = rowDb.nm_user;
+    user.idRole = rowDb.id_role;
+    user.idUser = rowDb.id_user;
   } catch (error) {
     return undefined;
   }
@@ -51,8 +51,6 @@ exports.findByUsernameAndPass = async (username, password) => {
         returnDTO.jsonBody = user;
       }
     }
-
-    returnDTO.jsonBody = {};
   } catch (error) {
     returnDTO.jsonBody = undefined;
     returnDTO.wasSuccess = false;
