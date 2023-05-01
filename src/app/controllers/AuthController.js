@@ -9,12 +9,15 @@ async function checkUserAndPassDB(reqBody) {
     reqBody.password
   );
 
-  if (!resultFind.wasSuccess && resultFind.error) {
-    return new ReturnDTO(401, false, constant.MsgStatus401);
+  if (!resultFind.wasSuccess && !resultFind.error) {
+    return new ReturnDTO(401, false, { messages: [constant.MsgStatus401] });
   }
 
-  if (!resultFind.wasSuccess || !resultFind.jsonBody) {
-    return new ReturnDTO(500, false, constant.MsgStatus500);
+  if (
+    (!resultFind.wasSuccess && resultFind.error) ||
+    (!resultFind.wasSuccess && !resultFind.jsonBody)
+  ) {
+    return new ReturnDTO(500, false, { messages: [constant.MsgStatus500] });
   }
 
   return new ReturnDTO(200, true, util.generateToken(resultFind.jsonBody));
@@ -37,4 +40,4 @@ class AuthController {
   }
 }
 
-module.exports = new AuthController();
+export default new AuthController();
