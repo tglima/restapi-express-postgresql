@@ -13,16 +13,13 @@ class DbUtil {
   }
 
   async getConnection() {
-    if (global.connection) {
-      return global.connection.connect();
+    if (!global.connection) {
+      global.connection = new Pool({
+        connectionString: process.env.DB_CONNECTION,
+      });
     }
 
-    const pool = new Pool({
-      connectionString: process.env.DB_CONNECTION,
-    });
-
-    global.connection = pool;
-    return pool.connect();
+    return global.connection.connect();
   }
 
   async testConnection() {
@@ -55,6 +52,13 @@ class DbUtil {
     }
 
     global.projectConfigs = res.rows;
+  }
+
+  async closeConnection() {
+    if (global.connection) {
+      await global.connection.end();
+      global.connection = null;
+    }
   }
 }
 
