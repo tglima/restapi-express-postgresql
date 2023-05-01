@@ -1,5 +1,10 @@
 export default class ReturnDTO {
-  constructor(statusCode, wasSuccess, jsonBody, error = undefined) {
+  constructor(
+    statusCode = 0,
+    wasSuccess = false,
+    jsonBody = {},
+    error = undefined
+  ) {
     this.statusCode = statusCode;
     this.wasSuccess = wasSuccess;
     this.jsonBody = jsonBody;
