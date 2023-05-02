@@ -11,7 +11,7 @@ const { default: dbUtil } = require('../utils/db.util');
  * @param {Date} dtStart A data e hora de início da requisição
  * @returns {void}
  */
-exports.SaveLogDB = async (req, res, idUser, dtStart) => {
+exports.saveLogDB = async (req, res, idUser, dtStart) => {
   try {
     const db = await dbUtil.getConnection();
 

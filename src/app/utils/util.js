@@ -80,7 +80,7 @@ class Util {
       res.jsonBody = { jsonResult: res.jsonBody };
     }
 
-    LogRepository.SaveLogDB(req, res, idUserRegister, dtStart);
+    LogRepository.saveLogDB(req, res, idUserRegister, dtStart);
   }
 
   generateToken(user) {
