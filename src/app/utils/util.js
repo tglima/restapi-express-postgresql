@@ -38,7 +38,10 @@ class Util {
 
     let returnDTO = new ReturnDTO(200, true, userDataReq);
     let bearerHeader;
-    const authHeader = req.headers.authorization;
+
+    const authHeader = req.headers.authorization
+      ? req.headers.authorization
+      : undefined;
 
     if (authHeader && typeof authHeader === 'string') {
       const [authType, authToken] = authHeader.split(' ');
