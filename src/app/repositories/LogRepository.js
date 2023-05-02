@@ -19,8 +19,8 @@ exports.saveLogDB = async (req, res, idUser, dtStart) => {
 
     sql = 'INSERT INTO api_logs';
     sql +=
-      '(url, id_user_register, req_headers, req_body, req_method, res_status_code, res_json_body, dt_start)';
-    sql += 'VALUES ($1,$2,$3,$4,$5,$6,$7,$8);';
+      '(url, id_user_register, req_headers, req_body, req_method, res_status_code, res_json_body, error, dt_start)';
+    sql += 'VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);';
     const values = [
       req.originalUrl,
       idUser,
@@ -29,6 +29,7 @@ exports.saveLogDB = async (req, res, idUser, dtStart) => {
       req.method,
       res.statusCode,
       res.jsonBody,
+      res.error,
       dtStart,
     ];
 
