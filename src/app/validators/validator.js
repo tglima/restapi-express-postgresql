@@ -1,10 +1,10 @@
+import configUtil from '../utils/config.util';
+
 const cpfCheck = require('cpf-check');
-const configUtil = require('../utils/config.util');
 const constant = require('../utils/constant.util');
 
-const sellConfig = configUtil.getSellConfig();
-const minAge = +sellConfig.minAgeSellProduct;
-const maxAge = +sellConfig.maxAgeSellProduct;
+const minAge = configUtil.getMinAgeSell();
+const maxAge = configUtil.getMaxAgeSell();
 
 let instance;
 
