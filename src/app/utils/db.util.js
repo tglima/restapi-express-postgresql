@@ -51,7 +51,12 @@ class DbUtil {
       throw new Error('Não foi possível ler a tabela project_configs');
     }
 
-    global.projectConfigs = res.rows;
+    global.projectConfigs = {};
+    const data = res.rows;
+
+    data.forEach((item) => {
+      global.projectConfigs[item.tag_config] = item.json_config;
+    });
   }
 
   async closeConnection() {
