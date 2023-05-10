@@ -9,7 +9,6 @@ module.exports = {
 
   coverageReporters: ['text-summary', 'lcov'],
 
-  // The test environment that will be used for testing
   testEnvironment: 'node',
 
   testMatch: ['**/__tests__/**/*.test.js'],
@@ -18,7 +17,9 @@ module.exports = {
     '.(js|jsx|ts|tsx)': '@sucrase/jest-plugin',
   },
 
-  globals: {
-    connection: null,
-  },
+  // Define o tempo máximo de timeout para cada teste para 10 segundos.
+  testTimeout: 10000,
+
+  globalSetup: './__tests__/utils/setup.js',
+  globalTeardown: './__tests__/utils/teardown.js',
 };
