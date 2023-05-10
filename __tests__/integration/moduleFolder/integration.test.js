@@ -4,14 +4,6 @@ import dbUtil from '../../../src/app/utils/db.util';
 
 const request = require('supertest');
 
-beforeAll(async () => {
-  await dbUtil.loadConfigsFromDB();
-});
-
-afterAll(async () => {
-  await dbUtil.closeConnection();
-});
-
 describe('Running tests for /health', () => {
   it('Test get /health', async () => {
     const response = await request(app).get(
@@ -31,21 +23,16 @@ describe('Running tests for /auth', () => {
       });
     expect(response.status).toEqual(401);
   });
-
   it('Test post /auth', async () => {
     const db = await dbUtil.getConnection();
     let sql = 'SELECT NM_USER, DE_PASSWORD ';
     sql += 'FROM USERS ';
     sql += 'WHERE ';
-    sql += 'ID_ROLE = $1 AND IS_ACTIVE = $2;';
-
-    const values = [2, true];
-
+    sql += 'ID_ROLE = $1 AND IS_ACTIVE = true;';
+    const values = [2];
     const resDB = await db.query(sql, values);
     const user = resDB.rows[0];
-
     db.release();
-
     const response = await request(app)
       .post(`${configUtil.getUrlBaseApi()}/auth`)
       .send({
