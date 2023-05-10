@@ -7,7 +7,7 @@
   "description": "API Rest desenvolvida com Express, PostgreSQL e Docker",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=development jest --detectOpenHandles --forceExit",
+    "test": "NODE_ENV=development jest --silent --maxConcurrency=1 --detectOpenHandles --forceExit",
     "start": "node ./dist/server.js",
     "dev": "nodemon src/server.js",
     "build": "sucrase ./src -d ./dist --transforms imports"
