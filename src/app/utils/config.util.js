@@ -7,30 +7,20 @@ const constant = require('./constant.util');
 
 let instance;
 
-function getJsonFromTagConfig(tagConfig) {
-  try {
-    const configs = global.projectConfigs;
-    const row = configs.filter((data) => data.tag_config === tagConfig);
-    return row[0].json_config;
-  } catch (error) {
-    throw new Error(`Erro ao tentar ler as configs da tag: ${tagConfig}`);
-  }
-}
-
 function getRegularConfig() {
-  return getJsonFromTagConfig('regularConfig');
+  return global.projectConfigs.regularConfig;
 }
 
 function getMessageContactConfig() {
-  return getJsonFromTagConfig('messageContactConfig');
+  return global.projectConfigs.messageContactConfig;
 }
 
 function getTokenConfig() {
-  return getJsonFromTagConfig('tokenConfig');
+  return global.projectConfigs.tokenConfig;
 }
 
 function getSellConfig() {
-  return getJsonFromTagConfig('sellConfig');
+  return global.projectConfigs.sellConfig;
 }
 
 class ConfigUtil {
