@@ -39,3 +39,21 @@ export const MsgRequiredDDDHasPhone =
   'Ao informar o número do telefone é obrigatório informar o DDD!';
 export const MsgRequiredPhoneOrEmail =
   'Obrigatório informar o E-mail, ou DDD e Telefone';
+
+export const defRegularConfig = {
+  idSuperUser: 0,
+  idSuperRole: 0,
+  idGuestUser: 0,
+  idGuestRole: 0,
+};
+export const defTokenConfig = {
+  tokenMinutesExpiration: 0,
+  tokenSecret: '',
+  tokenType: '',
+};
+export const defSellConfig = {
+  minAgeSellProduct: 0,
+  maxAgeSellProduct: 1,
+  nuYearsValProduct: 0,
+};
+export const defMessageContactConfig = { qtMinCharMessage: 0 };
