@@ -8,19 +8,31 @@ const constant = require('./constant.util');
 let instance;
 
 function getRegularConfig() {
-  return global.projectConfigs.regularConfig;
+  if (global.projectConfigs) {
+    return global.projectConfigs.regularConfig;
+  }
+  return constant.defRegularConfig;
 }
 
 function getMessageContactConfig() {
-  return global.projectConfigs.messageContactConfig;
+  if (global.projectConfigs) {
+    return global.projectConfigs.messageContactConfig;
+  }
+  return constant.defMessageContactConfig;
 }
 
 function getTokenConfig() {
-  return global.projectConfigs.tokenConfig;
+  if (global.projectConfigs) {
+    return global.projectConfigs.tokenConfig;
+  }
+  return constant.defTokenConfig;
 }
 
 function getSellConfig() {
-  return global.projectConfigs.sellConfig;
+  if (global.projectConfigs) {
+    return global.projectConfigs.sellConfig;
+  }
+  return constant.defSellConfig;
 }
 
 class ConfigUtil {
