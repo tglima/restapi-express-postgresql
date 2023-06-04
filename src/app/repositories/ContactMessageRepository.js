@@ -1,6 +1,6 @@
 const { default: ReturnDTO } = require('../dtos/ReturnDTO');
 const { default: dbUtil } = require('../utils/db.util');
-const constant = require('../utils/constant.util');
+const { default: constant } = require('../utils/constant.util');
 
 /**
  *

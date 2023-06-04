@@ -1,8 +1,7 @@
 import ReturnDTO from '../dtos/ReturnDTO';
 import configUtil from '../utils/config.util';
+import constant from '../utils/constant.util';
 import validator from './validator';
-
-const constant = require('../utils/constant.util');
 
 const qtMinCharMessage = +configUtil.getQtMinCharMessage();
 

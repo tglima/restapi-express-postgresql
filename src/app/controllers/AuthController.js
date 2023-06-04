@@ -1,6 +1,6 @@
 const { default: ReturnDTO } = require('../dtos/ReturnDTO');
 const userRepository = require('../repositories/UserRepository');
-const constant = require('../utils/constant.util');
+const { default: constant } = require('../utils/constant.util');
 const { default: util } = require('../utils/util');
 
 async function checkUserAndPassDB(reqBody) {

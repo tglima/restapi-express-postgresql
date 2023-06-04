@@ -2,9 +2,8 @@ import dotenv from 'dotenv';
 import ReturnDTO from '../dtos/ReturnDTO';
 import controlAccessRepository from '../repositories/ControlAccessRepository';
 import configUtil from '../utils/config.util';
+import constant from '../utils/constant.util';
 import util from '../utils/util';
-
-const constant = require('../utils/constant.util');
 
 const config = process.env;
 config.NODE_ENV = config.NODE_ENV || 'development';

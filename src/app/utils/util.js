@@ -1,8 +1,8 @@
 import jwt from 'jsonwebtoken';
 import ReturnDTO from '../dtos/ReturnDTO';
 import configUtil from './config.util';
+import constant from './constant.util';
 
-const constant = require('./constant.util');
 const LogRepository = require('../repositories/LogRepository');
 
 let instance;

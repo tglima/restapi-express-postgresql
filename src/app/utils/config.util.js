@@ -1,9 +1,9 @@
 import dotenv from 'dotenv';
+import constant from './constant.util';
 
 const envModeDefault = 'development';
 const envMode = process.env.NODE_ENV || envModeDefault;
 const path = `./config/env/${envMode}.env`;
-const constant = require('./constant.util');
 
 let instance;
 

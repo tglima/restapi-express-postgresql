@@ -1,7 +1,7 @@
 import configUtil from '../utils/config.util';
+import constant from '../utils/constant.util';
 
 const cpfCheck = require('cpf-check');
-const constant = require('../utils/constant.util');
 
 const minAge = configUtil.getMinAgeSell();
 const maxAge = configUtil.getMaxAgeSell();
