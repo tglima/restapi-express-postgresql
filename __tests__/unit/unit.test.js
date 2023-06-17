@@ -1,7 +1,7 @@
 import ReturnDTO from '../../src/app/dtos/ReturnDTO';
 import { saveNew } from '../../src/app/repositories/ContactMessageRepository';
 import { checkPermissionEndpoint } from '../../src/app/repositories/ControlAccessRepository';
-import { saveLogDB } from '../../src/app/repositories/LogRepository';
+import logRepository from '../../src/app/repositories/LogRepository';
 import productRepository from '../../src/app/repositories/ProductRepository';
 import userRepository from '../../src/app/repositories/UserRepository';
 import configUtil from '../../src/app/utils/config.util';
@@ -54,7 +54,9 @@ describe('Unit testing for repositories', () => {
     );
     const idUser = configUtil.getIdGuestUser();
     const dtStart = new Date().toJSON();
-    expect(await saveLogDB(req, res, idUser, dtStart)).toBeUndefined();
+    expect(
+      await logRepository.saveLogDB(req, res, idUser, dtStart)
+    ).toBeUndefined();
   });
   it('Test ContactMessageRepository.saveNew', async () => {
     const contactMessage = {

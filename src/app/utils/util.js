@@ -1,9 +1,8 @@
 import jwt from 'jsonwebtoken';
 import ReturnDTO from '../dtos/ReturnDTO';
+import logRepository from '../repositories/LogRepository';
 import configUtil from './config.util';
 import constant from './constant.util';
-
-const LogRepository = require('../repositories/LogRepository');
 
 let instance;
 
@@ -83,7 +82,7 @@ class Util {
       res.jsonBody = { jsonResult: res.jsonBody };
     }
 
-    LogRepository.saveLogDB(req, res, idUserRegister, dtStart);
+    logRepository.saveLogDB(req, res, idUserRegister, dtStart);
   }
 
   generateToken(user) {
