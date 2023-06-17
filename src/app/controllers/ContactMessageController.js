@@ -1,8 +1,7 @@
 import ReturnDTO from '../dtos/ReturnDTO';
+import contactMessageRepository from '../repositories/ContactMessageRepository';
 import util from '../utils/util';
-
-const contactMessageValidator = require('../validators/contactMessage.validator');
-const contactMessageRepository = require('../repositories/ContactMessageRepository');
+import contactMessageValidator from '../validators/contactMessage.validator';
 
 async function validateAndSaveMessage(req) {
   let returnValidate = new ReturnDTO(0, true, []);

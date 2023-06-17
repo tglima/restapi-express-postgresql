@@ -1,5 +1,5 @@
 import ReturnDTO from '../../src/app/dtos/ReturnDTO';
-import { saveNew } from '../../src/app/repositories/ContactMessageRepository';
+import contactMessageRepository from '../../src/app/repositories/ContactMessageRepository';
 import controlAccessRepository from '../../src/app/repositories/ControlAccessRepository';
 import logRepository from '../../src/app/repositories/LogRepository';
 import productRepository from '../../src/app/repositories/ProductRepository';
@@ -66,7 +66,7 @@ describe('Unit testing for repositories', () => {
       deTelephone: null,
     };
 
-    const result = await saveNew(contactMessage);
+    const result = await contactMessageRepository.saveNew(contactMessage);
     expect(result.wasSuccess).toEqual(true);
   });
 
