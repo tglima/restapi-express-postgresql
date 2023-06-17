@@ -1,6 +1,6 @@
 import ReturnDTO from '../../src/app/dtos/ReturnDTO';
 import { saveNew } from '../../src/app/repositories/ContactMessageRepository';
-import { checkPermissionEndpoint } from '../../src/app/repositories/ControlAccessRepository';
+import controlAccessRepository from '../../src/app/repositories/ControlAccessRepository';
 import logRepository from '../../src/app/repositories/LogRepository';
 import productRepository from '../../src/app/repositories/ProductRepository';
 import userRepository from '../../src/app/repositories/UserRepository';
@@ -11,7 +11,7 @@ import contactMessageValidator from '../../src/app/validators/contactMessage.val
 
 describe('Unit testing for repositories', () => {
   it('Test checkPermissionEndpoint', async () => {
-    const result = await checkPermissionEndpoint(
+    const result = await controlAccessRepository.checkPermissionEndpoint(
       '/',
       configUtil.getIdRoleGuestUser()
     );
