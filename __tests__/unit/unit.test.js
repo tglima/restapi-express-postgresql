@@ -3,7 +3,7 @@ import { saveNew } from '../../src/app/repositories/ContactMessageRepository';
 import { checkPermissionEndpoint } from '../../src/app/repositories/ControlAccessRepository';
 import { saveLogDB } from '../../src/app/repositories/LogRepository';
 import ProductRepository from '../../src/app/repositories/ProductRepository';
-import { findByUsernameAndPass } from '../../src/app/repositories/UserRepository';
+import userRepository from '../../src/app/repositories/UserRepository';
 import configUtil from '../../src/app/utils/config.util';
 import dbUtil from '../../src/app/utils/db.util';
 import util from '../../src/app/utils/util';
@@ -27,7 +27,10 @@ describe('Unit testing for repositories', () => {
     const resDB = await db.query(sql, values);
     const user = resDB.rows[0];
     db.release();
-    const result = await findByUsernameAndPass(user.nm_user, user.de_password);
+    const result = await userRepository.findByUsernameAndPass(
+      user.nm_user,
+      user.de_password
+    );
     expect(result.wasSuccess).toEqual(true);
   });
   it('Test SaveLogDB', async () => {
