@@ -2,7 +2,7 @@ import ReturnDTO from '../../src/app/dtos/ReturnDTO';
 import { saveNew } from '../../src/app/repositories/ContactMessageRepository';
 import { checkPermissionEndpoint } from '../../src/app/repositories/ControlAccessRepository';
 import { saveLogDB } from '../../src/app/repositories/LogRepository';
-import ProductRepository from '../../src/app/repositories/ProductRepository';
+import productRepository from '../../src/app/repositories/ProductRepository';
 import userRepository from '../../src/app/repositories/UserRepository';
 import configUtil from '../../src/app/utils/config.util';
 import dbUtil from '../../src/app/utils/db.util';
@@ -69,12 +69,12 @@ describe('Unit testing for repositories', () => {
   });
 
   it('Test ProductRepository.findAllProducts', async () => {
-    const result = await ProductRepository.findAllProducts();
+    const result = await productRepository.findAllProducts();
     expect(result.wasSuccess).toEqual(true);
   });
 
   it('Test ProductRepository.findProductById', async () => {
-    const result = await ProductRepository.findProductById(0);
+    const result = await productRepository.findProductById(0);
     expect(result.wasSuccess).toEqual(false);
   });
 });

@@ -1,9 +1,8 @@
 import ReturnDTO from '../dtos/ReturnDTO';
+import productRepository from '../repositories/ProductRepository';
 import constant from '../utils/constant.util';
 import util from '../utils/util';
 import Validator from '../validators/validator';
-
-const productRepository = require('../repositories/ProductRepository');
 
 class ProductController {
   /**
