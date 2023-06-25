@@ -46,7 +46,7 @@
     "jsonwebtoken": "^9.0.0",
     "morgan-body": "^2.6.8",
     "pg": "^8.10.0",
-    "swagger-ui-express": "^4.6.0",
+    "swagger-ui-express": "^4.6.3",
     "youch": "^3.2.2"
   },
   "devDependencies": {
