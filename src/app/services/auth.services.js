@@ -81,6 +81,10 @@ const verifyMustContinue = async (req) => {
   let urlBase = req.originalUrl;
   urlBase = urlBase.replace(`/api/v${config.NU_VERSION}`, '');
 
+  if (urlBase.includes('/doc/')) {
+    return true;
+  }
+
   if (urlBase === '/health') {
     return true;
   }
