@@ -34,9 +34,7 @@ class App {
   }
 
   loadRoutes() {
-    const nuVersion = +process.env.NU_VERSION || 1;
-    const urlBase = `/api/v${nuVersion}`;
-    this.server.use(urlBase, routes);
+    this.server.use(routes);
   }
 
   exceptionHandler() {
