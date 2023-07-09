@@ -21,9 +21,11 @@ class ProductController {
 
     if (!resultFind.wasSuccess) {
       response.statusCode = resultFind.error ? 500 : 404;
-      response.jsonBody = resultFind.error
+      const msg = resultFind.error
         ? constant.MsgStatus500
         : constant.MsgStatus404;
+
+      response.jsonBody = { messages: [msg] };
     } else {
       response.jsonBody = resultFind.jsonBody;
       response.statusCode = 200;
@@ -49,16 +51,17 @@ class ProductController {
 
     if (!Validator.hasValue(id) || !Validator.hasNumber(id)) {
       response.statusCode = 400;
-      response.jsonBody = constant.MsgRequiredId;
+      response.jsonBody = { messages: [constant.MsgRequiredId] };
       response.wasSuccess = false;
     } else {
       const resultFind = await productRepository.findProductById(id);
 
       if (!resultFind.wasSuccess) {
         response.statusCode = resultFind.error ? 500 : 404;
-        response.jsonBody = resultFind.error
+        const msg = resultFind.error
           ? constant.MsgStatus500
           : constant.MsgStatus404;
+        response.jsonBody = { messages: [msg] };
       } else {
         response.jsonBody = resultFind.jsonBody;
         response.statusCode = 200;

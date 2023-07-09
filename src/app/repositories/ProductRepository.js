@@ -6,12 +6,12 @@ import dbUtil from '../utils/db.util';
  */
 const sqlQueryProducts =
   'select ' +
-  'id_product as idProduct,' +
-  'nm_product as nmProduct,' +
-  'vl_month_price as vlMonthPrice,' +
-  'nm_video_quality as nmVideoQuality,' +
-  'nm_resolution as nmResolution,' +
-  'qt_simultaneous_screens as qtSimultaneousScreens ' +
+  'id_product, ' +
+  'nm_product, ' +
+  'vl_month_price, ' +
+  'nm_video_quality, ' +
+  'nm_resolution, ' +
+  'qt_simultaneous_screens ' +
   'from products ';
 
 class ProductRepository {
