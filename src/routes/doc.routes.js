@@ -1,13 +1,23 @@
+import dotenv from 'dotenv';
 import { Router } from 'express';
 import swaggerUi from 'swagger-ui-express';
 
+// Carrega as variáveis do arquivo .env
+dotenv.config();
+
 const swaggerDocument = require('../swagger.json');
 
-const customCss = `
-  .swagger-ui .response-col_links {
-    display: none;
-  }
-`;
+if (
+  swaggerDocument.servers &&
+  swaggerDocument.servers.length > 0 &&
+  swaggerDocument.servers[0].url
+) {
+  let { url } = swaggerDocument.servers[0];
+  url = url.replace('{{URL_API}}', process.env.URL_API);
+  swaggerDocument.servers[0].url = url;
+}
+
+const customCss = `.swagger-ui .response-col_links { display: none; } `;
 
 const options = {
   customCss,

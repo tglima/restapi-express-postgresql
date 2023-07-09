@@ -14,7 +14,7 @@
   ],
   "servers":[
     {
-      "url":"http://localhost:3000/api/v1",
+      "url":"{{URL_API}}/api/v1",
       "description":"Ambiente de desenvolvimento"
     }
   ],
