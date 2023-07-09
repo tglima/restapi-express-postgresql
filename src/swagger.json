@@ -280,21 +280,6 @@
                 }
               }
             }
-          },
-          "404":{
-            "description":"Não encontrado",
-            "content":{
-              "application/json":{
-                "schema":{
-                  "$ref":"#/components/schemas/defaultApiResponse"
-                },
-                "examples":{
-                  "notFound":{
-                    "$ref":"#/components/examples/notFound"
-                  }
-                }
-              }
-            }
           }
         }
       }
@@ -352,32 +337,32 @@
       "product":{
         "type":"object",
         "properties":{
-          "idProduct":{
+          "id_product":{
             "type":"integer",
             "example":1,
             "required":true
           },
-          "nmProduct":{
+          "nm_product":{
             "type":"string",
             "example":"Basic",
             "required":true
           },
-          "vlMonthPrice":{
+          "vl_month_price":{
             "type":"number",
             "example":14.99,
             "required":true
           },
-          "nmVideoQuality":{
+          "nm_videoQuality":{
             "type":"number",
             "example":14.99,
             "required":true
           },
-          "nmResolution":{
+          "nm_resolution":{
             "type":"string",
             "example":"480p",
             "required":true
           },
-          "qtSimultaneousScreens":{
+          "qt_simultaneous_screens":{
             "type":"number",
             "example":1,
             "required":true
@@ -398,21 +383,21 @@
       "contactMessage":{
         "type":"object",
         "properties":{
-          "nmContact":{
+          "nm_contact":{
             "type":"string",
             "example":"Maria da Silva",
             "required":true
           },
-          "deEmail":{
+          "de_email":{
             "type":"string",
             "example":"contato@email.com"
           },
-          "deMessage":{
+          "de_message":{
             "type":"string",
             "example":"Mensagem enviada para testes contato",
             "required":true
           },
-          "deTelephone":{
+          "de_telephone":{
             "type":"string",
             "example":"48999999999"
           }
@@ -458,7 +443,7 @@
       "unauthorized":{
         "value":{
           "messages":[
-            "Acesso negado, Token de acesso inválido!"
+            "Usuário sem permissão ou Token inválido!"
           ]
         }
       }

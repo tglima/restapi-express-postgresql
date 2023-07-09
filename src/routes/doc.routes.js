@@ -11,10 +11,17 @@ const customCss = `
 
 const options = {
   customCss,
+  swaggerOptions: {
+    url: '/doc/swagger.json',
+  },
 };
 
 const router = Router();
-router.use('', swaggerUi.serve);
-router.get('', swaggerUi.setup(swaggerDocument, options));
+router.get('/swagger.json', (req, res) => res.json(swaggerDocument));
+router.use(
+  '',
+  swaggerUi.serveFiles(null, options),
+  swaggerUi.setup(null, options)
+);
 
 export default router;
