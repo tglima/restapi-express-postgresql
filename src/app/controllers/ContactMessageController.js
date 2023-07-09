@@ -10,11 +10,7 @@ async function validateAndSaveMessage(req) {
   returnValidate = await contactMessageValidator.validateSaveMessage(message);
 
   if (!returnValidate.wasSuccess) {
-    return new ReturnDTO(
-      400,
-      false,
-      JSON.parse(JSON.stringify(returnValidate.messages))
-    );
+    return new ReturnDTO(400, false, { messages: returnValidate.jsonBody });
   }
 
   const resultSave = await contactMessageRepository.saveNew(message);
