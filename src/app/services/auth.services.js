@@ -113,14 +113,12 @@ class AuthService {
         next();
       } else {
         res.status(401).send({
-          success: false,
-          message: 'Acesso negado, Token de acesso inválido',
+          message: [constant.MsgStatus401Alt],
         });
       }
     } catch (error) {
       res.status(500).json({
-        success: false,
-        message: 'Ocorreu um erro ao processar sua solicitação',
+        message: [constant.MsgStatus500],
       });
     }
   }
