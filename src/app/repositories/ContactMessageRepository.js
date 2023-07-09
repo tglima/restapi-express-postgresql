@@ -15,10 +15,10 @@ class ContactMessageRepository {
     try {
       const db = await dbUtil.getConnection();
       const values = [
-        contactMessage.nmContact ? contactMessage.nmContact : '',
-        contactMessage.deEmail ? contactMessage.deEmail : null,
-        contactMessage.deMessage ? contactMessage.deMessage : '',
-        contactMessage.deTelephone ? contactMessage.deTelephone : null,
+        contactMessage.nm_contact ? contactMessage.nm_contact : '',
+        contactMessage.de_Email ? contactMessage.de_email : null,
+        contactMessage.de_message ? contactMessage.de_message : '',
+        contactMessage.de_telephone ? contactMessage.de_telephone : null,
       ];
 
       let sql = 'INSERT INTO contact_messages ';
@@ -30,7 +30,7 @@ class ContactMessageRepository {
     } catch (error) {
       returnDTO.statusCode = 500;
       returnDTO.wasSuccess = false;
-      returnDTO.jsonBody = constant.MsgStatus500;
+      returnDTO.jsonBody = { messages: [constant.MsgStatus500] };
       returnDTO.error = error;
     }
 

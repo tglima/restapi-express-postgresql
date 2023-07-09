@@ -8,33 +8,33 @@ const qtMinCharMessage = +configUtil.getQtMinCharMessage();
 class ContactMessageValidator {
   async validateSaveMessage(message) {
     const returnDTO = new ReturnDTO(200, true, []);
-    const nuPhoneFull = validator.hasValue(message.deTelephone)
-      ? message.deTelephone.replace(/[^0-9]/g, '')
+    const nuPhoneFull = validator.hasValue(message.de_telephone)
+      ? message.de_telephone.replace(/[^0-9]/g, '')
       : undefined;
 
-    if (!validator.isValidName(message.nmContact)) {
+    if (!validator.isValidName(message.nm_contact)) {
       returnDTO.jsonBody.push(constant.MsgInvalidName);
       returnDTO.wasSuccess = false;
     }
 
     if (
-      !validator.hasValue(message.deMessage) ||
-      message.deMessage.trim().length < qtMinCharMessage
+      !validator.hasValue(message.de_message) ||
+      message.de_message.trim().length < qtMinCharMessage
     ) {
       returnDTO.jsonBody.push(constant.MsgInvalidQtCharMessage);
       returnDTO.wasSuccess = false;
     }
 
     if (
-      validator.hasValue(message.deEmail) &&
-      !validator.isValidEmail(message.deEmail)
+      validator.hasValue(message.de_email) &&
+      !validator.isValidEmail(message.de_email)
     ) {
       returnDTO.jsonBody.push.push(constant.MsgInvalidEmail);
       returnDTO.wasSuccess = false;
     }
 
     if (
-      !validator.hasValue(message.deEmail) &&
+      !validator.hasValue(message.de_email) &&
       !validator.hasValue(nuPhoneFull)
     ) {
       returnDTO.jsonBody.push(constant.MsgRequiredPhoneOrEmail);
