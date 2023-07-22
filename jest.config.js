@@ -13,10 +13,6 @@ module.exports = {
 
   testMatch: ['**/__tests__/**/*.test.js'],
 
-  transform: {
-    '.(js|jsx|ts|tsx)': '@sucrase/jest-plugin',
-  },
-
   // Define o tempo máximo de timeout para cada teste para 10 segundos.
   testTimeout: 10000,
 

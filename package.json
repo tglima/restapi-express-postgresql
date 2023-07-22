@@ -10,7 +10,7 @@
     "test": "NODE_ENV=development jest --silent --maxConcurrency=1 --detectOpenHandles --forceExit",
     "start": "node ./dist/server.js",
     "dev": "nodemon src/server.js",
-    "build": "sucrase ./src -d ./dist --transforms imports"
+    "build": ""
   },
   "repository": {
     "type": "git",
@@ -50,7 +50,6 @@
     "youch": "^3.2.2"
   },
   "devDependencies": {
-    "@sucrase/jest-plugin": "^3.0.0",
     "@types/jest": "^29.5.1",
     "@types/supertest": "^2.0.12",
     "eslint": "^8.32.0",
@@ -62,13 +61,9 @@
     "jest": "^29.5.0",
     "nodemon": "^3.0.1",
     "prettier": "^2.8.3",
-    "sucrase": "^3.29.0",
     "supertest": "^6.3.3"
   },
   "nodemonConfig": {
-    "execMap": {
-      "js": "node -r sucrase/register"
-    },
     "ignore": [
       "doc"
     ]
