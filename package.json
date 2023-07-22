@@ -11,7 +11,8 @@
     "start": "export NODE_ENV=production && node ./dist/server.js",
     "dev": "NODE_ENV=development nodemon --exec npx babel-node src/server.js",
     "prebuild": "if [ -d ./dist ]; then rm -rf ./dist; fi",
-    "build": "babel ./src --out-dir ./dist && cp ./src/swagger.json ./dist"
+    "build": "babel ./src --out-dir ./dist && cp ./src/swagger.json ./dist",
+    "eslint": "npx eslint src"
   },
   "repository": {
     "type": "git",
