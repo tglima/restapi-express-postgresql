@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import AuthRoutes from './auth.routes';
 import ContactRoutes from './contactMessage.routes';
+import CustomerRoutes from './customer.routes';
 import DocRoutes from './doc.routes';
 import HealthRoutes from './health.routes';
 import ProductRoutes from './product.routes';
@@ -14,5 +15,6 @@ routes.use(`${urlBase}/`, AuthRoutes);
 routes.use(`${urlBase}/health`, HealthRoutes);
 routes.use(`${urlBase}/product`, ProductRoutes);
 routes.use(`${urlBase}/contact`, ContactRoutes);
+routes.use(`${urlBase}/customer`, CustomerRoutes);
 
 export default routes;

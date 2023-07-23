@@ -1,6 +1,7 @@
 import ReturnDTO from '../../src/app/dtos/ReturnDTO';
 import contactMessageRepository from '../../src/app/repositories/ContactMessageRepository';
 import controlAccessRepository from '../../src/app/repositories/ControlAccessRepository';
+import CustomerRepository from '../../src/app/repositories/CustomerRepository';
 import logRepository from '../../src/app/repositories/LogRepository';
 import productRepository from '../../src/app/repositories/ProductRepository';
 import userRepository from '../../src/app/repositories/UserRepository';
@@ -77,6 +78,16 @@ describe('Unit testing for repositories', () => {
 
   it('Test ProductRepository.findProductById', async () => {
     const result = await productRepository.findProductById(0);
+    expect(result.wasSuccess).toEqual(false);
+  });
+
+  it('Test CustomerRepository.findById', async () => {
+    const result = await CustomerRepository.findById(0);
+    expect(result.wasSuccess).toEqual(false);
+  });
+
+  it('Test CustomerRepository.findByDocument', async () => {
+    const result = await CustomerRepository.findByNuDocument(0);
     expect(result.wasSuccess).toEqual(false);
   });
 });

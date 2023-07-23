@@ -27,6 +27,7 @@ class ConstantUtil {
     this.MsgNuDocumentUninformed = 'nuDocument Não informado!';
     this.MsgIdCustomerUninformed = 'idCustomer Não informado!';
     this.MsgRequiredId = 'Obrigatório informar o id';
+    this.MsgInvalidId = 'O id informado é inválido!';
     this.MsgRequiredPhoneHasDDD =
       'Ao informar o DDD é obrigatório informar o número do telefone!';
     this.MsgRequiredDDDHasPhone =

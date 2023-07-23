@@ -283,6 +283,175 @@
           }
         }
       }
+    },
+    "/customer/find/id={id}":{
+      "get":{
+        "summary":"Busca o Cliente pelo ID",
+        "description":"Rota para obter os dados de um cliente de acordo com o seu id",
+        "tags":[
+          "customer"
+        ],
+        "security":[
+          {
+            "bearerAuth":[
+
+            ]
+          }
+        ],
+        "parameters":[
+          {
+            "name":"id",
+            "in":"path",
+            "required":true,
+            "description":"Id do cliente a ser pesquisado",
+            "schema":{
+              "type":"integer",
+              "format":"int32"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Cliente encontrado",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/customer"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Falha na Requisição",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/defaultApiResponse"
+                },
+                "examples":{
+                  "invalidRequest":{
+                    "$ref":"#/components/examples/invalidRequest"
+                  }
+                }
+              }
+            }
+          },
+          "401":{
+            "description":"Falha na autenticação",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/defaultApiResponse"
+                },
+                "examples":{
+                  "unauthorized":{
+                    "$ref":"#/components/examples/unauthorized"
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"Não encontrado",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/defaultApiResponse"
+                },
+                "examples":{
+                  "notFound":{
+                    "$ref":"#/components/examples/notFound"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customer/find/document={nu_document}":{
+      "get":{
+        "summary":"Busca o Cliente pelo número do documento",
+        "description":"Rota para obter os dados de um cliente de acordo com o seu documento",
+        "tags":[
+          "customer"
+        ],
+        "security":[
+          {
+            "bearerAuth":[
+
+            ]
+          }
+        ],
+        "parameters":[
+          {
+            "name":"nu_document",
+            "in":"path",
+            "required":true,
+            "description":"Corresponde ao CPF de um cliente",
+            "schema":{
+              "type":"string"
+            }
+          }
+        ],
+        "responses":{
+          "200":{
+            "description":"Cliente encontrado",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/customer"
+                }
+              }
+            }
+          },
+          "400":{
+            "description":"Falha na Requisição",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/defaultApiResponse"
+                },
+                "examples":{
+                  "invalidRequest":{
+                    "$ref":"#/components/examples/invalidRequest"
+                  }
+                }
+              }
+            }
+          },
+          "401":{
+            "description":"Falha na autenticação",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/defaultApiResponse"
+                },
+                "examples":{
+                  "unauthorized":{
+                    "$ref":"#/components/examples/unauthorized"
+                  }
+                }
+              }
+            }
+          },
+          "404":{
+            "description":"Não encontrado",
+            "content":{
+              "application/json":{
+                "schema":{
+                  "$ref":"#/components/schemas/defaultApiResponse"
+                },
+                "examples":{
+                  "notFound":{
+                    "$ref":"#/components/examples/notFound"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components":{
@@ -400,6 +569,51 @@
           "de_telephone":{
             "type":"string",
             "example":"48999999999"
+          }
+        }
+      },
+      "customer":{
+        "type":"object",
+        "properties":{
+          "id_customer":{
+            "type":"integer",
+            "example":1,
+            "required":true
+          },
+          "nm_customer":{
+            "type":"string",
+            "example":"Maria da Silva",
+            "required":true
+          },
+          "de_gender":{
+            "type":"string",
+            "example":"F",
+            "required":true
+          },
+          "dt_birth":{
+            "type":"string($date-time)",
+            "example":"1965-07-02T03:00:00.000Z",
+            "required":true
+          },
+          "nu_document":{
+            "type":"string",
+            "example":"01234567890",
+            "required":true
+          },
+          "de_email":{
+            "type":"string",
+            "example":"contato@email.com",
+            "required":false
+          },
+          "nu_ddd":{
+            "type":"string",
+            "example":"11",
+            "required":false
+          },
+          "nu_phone":{
+            "type":"string",
+            "example":"32320000",
+            "required":false
           }
         }
       }

@@ -94,3 +94,63 @@ describe('Running tests for /products', () => {
     expect(response.status).toEqual(404);
   });
 });
+
+describe('Running tests for /customers', () => {
+  it('Test get customer/find/id=1', async () => {
+    token = await getToken();
+    const response = await request(app)
+      .get(`${configUtil.getUrlBaseApi()}/customer/find/id=${1}`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toEqual(200);
+  });
+
+  it('Test get customer/find/id=', async () => {
+    token = await getToken();
+    const response = await request(app)
+      .get(`${configUtil.getUrlBaseApi()}/customer/find/id=`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toEqual(400);
+  });
+
+  it('Test get customer/find/id=0', async () => {
+    token = await getToken();
+    const response = await request(app)
+      .get(`${configUtil.getUrlBaseApi()}/customer/find/id=0`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toEqual(404);
+  });
+
+  it('Test get customer/find/document=17816020937', async () => {
+    token = await getToken();
+    const response = await request(app)
+      .get(
+        `${configUtil.getUrlBaseApi()}/customer/find/document=${17816020937}`
+      )
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toEqual(200);
+  });
+
+  it('Test get customer/find/document=01234567890', async () => {
+    token = await getToken();
+    const response = await request(app)
+      .get(`${configUtil.getUrlBaseApi()}/customer/find/document=01234567890`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toEqual(404);
+  });
+
+  it('Test get customer/find/document=0', async () => {
+    token = await getToken();
+    const response = await request(app)
+      .get(`${configUtil.getUrlBaseApi()}/customer/find/document=0`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toEqual(400);
+  });
+
+  it('Test get customer/find/document=', async () => {
+    token = await getToken();
+    const response = await request(app)
+      .get(`${configUtil.getUrlBaseApi()}/customer/find/document=`)
+      .set('Authorization', `Bearer ${token}`);
+    expect(response.status).toEqual(400);
+  });
+});
