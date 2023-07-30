@@ -16,7 +16,7 @@ class ConstantUtil {
     this.MsgInvalidName = 'Nome inválido!';
     this.MsgInvalidDate = 'A data informada é inválida!';
     this.MsgInvalidDtBirth = 'A data de nascimento informada é inválida!';
-    this.MsgInvalidDtBirthAlt =
+    this.MsgInvalidAge =
       'A data de nascimento informada não corresponde a uma idade válida!';
     this.MsgInvalidGender = 'Sexo inválido!';
     this.MsgInvalidEmail = 'O e-mail informado é inválido!';
