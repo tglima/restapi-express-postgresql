@@ -4,26 +4,6 @@ const { default: ReturnDTO } = require('../dtos/ReturnDTO');
 const { default: constant } = require('../utils/constant.util');
 const { default: util } = require('../utils/util');
 
-async function checkUserAndPassDB(reqBody) {
-  const resultFind = await userRepository.findByUsernameAndPass(
-    reqBody.username,
-    reqBody.password
-  );
-
-  if (!resultFind.wasSuccess && !resultFind.error) {
-    return new ReturnDTO(401, false, { messages: [constant.MsgStatus401] });
-  }
-
-  if (
-    (!resultFind.wasSuccess && resultFind.error) ||
-    (!resultFind.wasSuccess && !resultFind.jsonBody)
-  ) {
-    return new ReturnDTO(500, false, { messages: [constant.MsgStatus500] });
-  }
-
-  return new ReturnDTO(200, true, util.generateToken(resultFind.jsonBody));
-}
-
 class AuthController {
   /**
    *
@@ -35,7 +15,30 @@ class AuthController {
    */
   async auth(req, res) {
     const dtStart = new Date().toJSON();
-    const response = await checkUserAndPassDB(req.body);
+    const { username, password } = req.body;
+    const response = new ReturnDTO();
+
+    const resultFind = await userRepository.findByUsernameAndPass(
+      username,
+      password
+    );
+
+    if (resultFind.wasSuccess) {
+      response.statusCode = 200;
+      response.jsonBody = util.generateToken(resultFind.jsonBody);
+      //
+    } else {
+      //
+      response.statusCode = resultFind.error ? 500 : 401;
+
+      const msgError =
+        response.statusCode === 500
+          ? constant.MsgStatus500
+          : constant.MsgStatus401;
+
+      response.jsonBody = { messages: [msgError] };
+    }
+
     await util.saveLog(req, response, dtStart);
     return res.status(response.statusCode).send(response.jsonBody);
   }
