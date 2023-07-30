@@ -25,10 +25,10 @@ class UserRepository {
 
       db.release();
 
-      if (!user.idUser || !user.nmUser || !user.idRole) {
-        returnDTO.wasSuccess = false;
-        returnDTO.jsonBody = undefined;
-      } else {
+      returnDTO.wasSuccess = false;
+      returnDTO.jsonBody = undefined;
+
+      if (user.idUser && user.nmUser && user.idRole) {
         returnDTO.wasSuccess = true;
         returnDTO.jsonBody = user;
       }
