@@ -1,10 +1,8 @@
+import { isValid, parseISO } from 'date-fns';
 import configUtil from '../utils/config.util';
 import constant from '../utils/constant.util';
 
 const cpfCheck = require('cpf-check');
-
-const minAge = configUtil.getMinAgeSell();
-const maxAge = configUtil.getMaxAgeSell();
 
 let instance;
 
@@ -98,24 +96,9 @@ class Validator {
       if (!this.hasValue(obj)) {
         return false;
       }
-
-      const regname = /^\d{4}-\d{1,2}-\d{1,2}$/;
-      if (!regname.test(obj)) {
-        return false;
-      }
-
-      const date = new Date(obj);
-
-      if (
-        typeof date === 'object' &&
-        date !== null &&
-        typeof date.getTime === 'function' &&
-        !Number.isNaN(date)
-      ) {
-        return true;
-      }
-
-      return false;
+      const dateObject = parseISO(obj);
+      const result = isValid(dateObject);
+      return result;
     } catch (error) {
       return false;
     }
@@ -167,8 +150,8 @@ class Validator {
     const dateUser = new Date(obj);
     const dateNow = new Date();
     const ageNow = dateNow.getFullYear() - dateUser.getFullYear();
-    const isOverMinAge = ageNow >= minAge;
-    const isBelowMaxAge = ageNow <= maxAge;
+    const isOverMinAge = ageNow >= configUtil.getMinAgeSell();
+    const isBelowMaxAge = ageNow <= configUtil.getMaxAgeSell();
 
     return isOverMinAge && isBelowMaxAge;
   }
