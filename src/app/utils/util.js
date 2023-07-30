@@ -54,9 +54,10 @@ class Util {
       return returnDTO;
     }
 
+    const tokenSecret = configUtil.getTokenSecret();
     returnDTO = await jwt.verify(
       bearerHeader,
-      configUtil.getTokenSecret(),
+      tokenSecret,
       (error, decoded) => {
         if (error) {
           returnDTO.error = error;
@@ -91,7 +92,7 @@ class Util {
     token.access_token = jwt.sign(
       {
         idRole: user.idRole,
-        idUserRegister: user.id,
+        idUserRegister: user.idUser,
       },
       configUtil.getTokenSecret(),
       { expiresIn: 60 * configUtil.getTokenMinutesExpiration() }
